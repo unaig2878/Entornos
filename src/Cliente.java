@@ -127,32 +127,17 @@ public class Cliente {
 			Producto producto3, Producto producto4, Producto producto5, PasarelaDePago pago, int precp1, int precp2,
 			String nomproductof1, String nomproductof2, String nomproductof11, String nomproductof21,
 			String nomproductof12, String nomproductof22, String nomproductof13, String nomproductof23, int precp11,
-			int precp12, int precp13, int precp21, int precp22, int precp23) {
-		
+			int precp12, int precp13, int precp21, int precp22, int precp23, Scanner sc) {
+		Menus menu = new Menus();
 		// le restringimos el acceso a usuarios que no tengan cuenta
 		if (telefonocliente == telefono1 || telefonocliente == telefono2 || telefonocliente == telefono3) {
-			Scanner sc = new Scanner(System.in);
 			// imprimimos todos los pedidos posibles y le damos la opcion de elgir
-			System.out.println("Estas Registrado");
-			System.out.println("Seleccione el producto que quiere en numero");
-			System.out.println("1." + nomproducto1);
-			System.out.println("2." + nomproducto2);
-			System.out.println("3." + nomproducto3);
-			System.out.println("4." + nomproducto4);
-			System.out.println("5." + nomproducto5);
-			int resp1 = sc.nextInt();
+			int resp1 = 0, decision = 0;
 			// le damos la opcion de elegir otro
-			System.out.println("¿Quiere otro?(recuerde que solo le queda 1)");
-			System.out.println("1.si ... 2.No");
-			int decision = sc.nextInt();
+			menu.princ(nomproducto1, nomproducto2, nomproducto3, nomproducto4, nomproducto5, resp1, decision, sc);
+
 			if (decision == 1) {
-				System.out.println("1." + nomproducto1);
-				System.out.println("2." + nomproducto2);
-				System.out.println("3." + nomproducto3);
-				System.out.println("4." + nomproducto4);
-				System.out.println("5." + nomproducto5);
-				System.out.println("Escriba el numero de cual");
-				resp2 = sc.nextInt();
+				menu.decision1(nomproducto1, nomproducto2, nomproducto3, nomproducto4, nomproducto5, resp2, sc);
 				if (resp1 != resp2) {
 					switch (resp1) {
 					// le imprimimos los productos que haya pedido y pedimos cantidad+calculo de
@@ -341,32 +326,11 @@ public class Cliente {
 					default:
 						System.out.println("Opción no válida. Por favor, seleccione un número entre 1 y 5.");
 					}
-					if(telefonocliente==telefono1) {
-						nomproductof11 = nomproducto1;
-						nomproductof21 = nomproducto2;
-						precp11 = precp1;
-						precp21 = precp2;
-					}else {
-						if(telefonocliente==telefono2) {
-							nomproductof12 = nomproducto1;
-							nomproductof22 = nomproducto2;
-							precp12 = precp1;
-							precp22 = precp2;
-						}else {
-							if(telefonocliente==telefono3) {
-								nomproductof13 = nomproducto1;
-								nomproductof23 = nomproducto2;
-								precp13 = precp1;
-								precp23 = precp2;
-							}else {
-								System.out.println("No esta registrado");
-							}
-						}
-					}
+
 				} else {
 					System.out.println("Valor no valido");
 				}
-				sc.close();
+
 			}
 			
 		} else {
@@ -374,6 +338,7 @@ public class Cliente {
 			System.out.println("Su numero de telefono no esta registrado");
 			System.out.println("Registrese por favor");
 		}
+
 
 	}
 }

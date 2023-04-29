@@ -50,7 +50,7 @@ public class Producto {
 	}
 
 	// funcion de stockage
-	public void Stockage(int cantproducto1, int cantproducto2) {
+	public void Stockage(int cantproducto1, int cantproducto2, Scanner sc) {
 		// revisamos a ver si ha escogido 2 productos o uno
 		if (cantproducto1 > 0 && cantproducto2 > 0) {
 			int i;
@@ -63,7 +63,6 @@ public class Producto {
 			System.out.println("###Menu Stockage###");
 			System.out.println("Nos quedan 30 productos en stock del primer procucto");
 
-			Scanner sc1 = new Scanner(System.in);
 			System.out.print("Cuántos valores desea quitar del ArrayList? ");
 			// usamos un bucle para restar la cantidad de productos que ha pedido del
 			// stockage
@@ -78,7 +77,7 @@ public class Producto {
 				// si no tenemos suficientes productos le da error.
 				System.out.println("No tenemos " + cantproducto1 + " de ese producto en Stock");
 				System.out.println("Desea volver mas tarde 1.Si 2.No");
-				int resp4 = sc1.nextInt();
+				int resp4 = sc.nextInt();
 				if (resp4 == 1) {
 					while (i < 30) {
 						list.add(i);
@@ -107,7 +106,7 @@ public class Producto {
 			} else {
 				System.out.println("No tenemos " + cantproducto2 + " de ese producto en Stock");
 				System.out.println("Desea volver mas tarde 1.Si 2.No");
-				int resp4 = sc1.nextInt();
+				int resp4 = sc.nextInt();
 				if (resp4 == 1) {
 					while (i < 30) {
 						list2.add(i);
@@ -126,7 +125,6 @@ public class Producto {
 				}
 				System.out.println("Nos quedan 30 productos en stock del primer procucto");
 
-				Scanner sc = new Scanner(System.in);
 				System.out.print("Cuántos valores desea quitar del ArrayList? ");
 
 				if (cantproducto1 > 0 && cantproducto1 < list.size()) {

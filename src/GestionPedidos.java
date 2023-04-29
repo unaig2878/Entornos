@@ -1,9 +1,10 @@
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class GestionPedidos {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 		Scanner sc = new Scanner(System.in);
 		// aqui esta instanciado el primer cliente
 
@@ -114,6 +115,7 @@ public class GestionPedidos {
 		trat.clientes(telefono1, telefono2, telefono3, cliente1, cliente2, cliente3);
 
 		// instanciamos todos los productos que vamos a usar
+		// Instanciamos todos los productos que vamos a usar
 		Producto producto1 = new Producto();
 		Producto producto2 = new Producto();
 		Producto producto3 = new Producto();
@@ -161,7 +163,7 @@ public class GestionPedidos {
 		int precproducto4 = sc.nextInt();
 		producto4.setPrecio(precproducto4);
 
-		producto1.setCantidad(cantproducto4);
+		producto4.setCantidad(cantproducto4);
 		sc.nextLine();
 		System.out.println("Indique el nombre de su Producto 5");
 		String nomproducto5 = sc.nextLine();
@@ -187,7 +189,7 @@ public class GestionPedidos {
 					telefono2, telefono3, resp2, cant1, cant2, precfin1, precfin2, precfinfin, producto1, producto2,
 					producto3, producto4, producto5, pago, precp1, precp2, nomproductof1, nomproductof2, nomproductof11,
 					nomproductof21, nomproductof22, nomproductof21, nomproductof13, nomproductof23, telefonocliente,
-					telefonocliente, telefonocliente, telefonocliente, telefonocliente, telefonocliente);
+					telefonocliente, telefonocliente, telefonocliente, telefonocliente, telefonocliente, sc);
 			// el metodo toString viene de la clase pedido y nos imprime el pedido en
 			// pantalla
 			pedido.toString();
@@ -196,14 +198,12 @@ public class GestionPedidos {
 			cantproducto2 = cliente1.getCant2();
 
 			// Calculamos si el pedido es valido con una funcion de stockage
-			producto.Stockage(cantproducto1, cantproducto2);
+			producto.Stockage(cantproducto1, cantproducto2, sc);
 			// llamamos al metodo para pagar en el que te da la opcion de pedir pago
-			pago.elegirpago(precfin1, precfin2, precfinfin, pago);
+			pago.elegirpago(precfin1, precfin2, precfinfin, pago, sc);
 			// Generamos el codigo de pago
 			pago.CodigoPago(codigoPago1);
-			trat.Tiquets(nomproductof11, nomproductof21, nomproductof12, nomproductof22, nomproductof13, nomproductof23,
-					precp11, precp12, precp13, precp21, precp22, precp23, cliente1, cliente2, cliente3, producto1,
-					producto2, producto3, producto4, producto5);
+			trat.generarTicket(precfin1, precfin2, nomproductof1, nomproductof2);
 		} else {
 			if (telefonocliente == telefono2) {
 				// sigue el mismo proceso que la anterior solo que con otro cliente
@@ -213,17 +213,15 @@ public class GestionPedidos {
 						producto3, producto4, producto5, pago, precp1, precp2, nomproductof1, nomproductof2,
 						nomproductof11, nomproductof21, nomproductof22, nomproductof21, nomproductof13, nomproductof23,
 						telefonocliente, telefonocliente, telefonocliente, telefonocliente, telefonocliente,
-						telefonocliente);
+						telefonocliente, sc);
 				pedido.toString();
 				cantproducto1 = cliente1.getCant1();
 				cantproducto2 = cliente1.getCant2();
 
-				producto.Stockage(cantproducto1, cantproducto2);
-				pago.elegirpago(precfin1, precfin2, precfinfin, pago);
+				producto.Stockage(cantproducto1, cantproducto2, sc);
+				pago.elegirpago(precfin1, precfin2, precfinfin, pago, sc);
 				pago.CodigoPago(codigoPago1);
-				trat.Tiquets(nomproductof11, nomproductof21, nomproductof12, nomproductof22, nomproductof13,
-						nomproductof23, precp11, precp12, precp13, precp21, precp22, precp23, cliente1, cliente2,
-						cliente3, producto1, producto2, producto3, producto4, producto5);
+				trat.generarTicket(precfin1, precfin2, nomproductof1, nomproductof2);
 			} else {
 			}
 
@@ -234,18 +232,16 @@ public class GestionPedidos {
 						telefono2, telefono3, resp2, cant1, cant2, precfin1, precfin2, precfinfin, producto1, producto2,
 						producto3, producto4, producto5, pago, precp1, precp2, nomproductof1, nomproductof2,
 						nomproductof11, nomproductof21, nomproductof22, nomproductof22, nomproductof13, nomproductof23,
-						precp11, precp12, precp13, precp21, precp22, precp23);
+						precp11, precp12, precp13, precp21, precp22, precp23, sc);
 				pedido.toString();
 				cantproducto1 = cliente1.getCant1();
 				cantproducto2 = cliente1.getCant2();
-				producto.Stockage(cantproducto1, cantproducto2);
+				producto.Stockage(cantproducto1, cantproducto2, sc);
 
-				pago.elegirpago(precfin1, precfin2, precfinfin, pago);
+				pago.elegirpago(precfin1, precfin2, precfinfin, pago, sc);
 
 				pago.CodigoPago(codigoPago1);
-				trat.Tiquets(nomproductof11, nomproductof21, nomproductof12, nomproductof22, nomproductof13,
-						nomproductof23, precp11, precp12, precp13, precp21, precp22, precp23, cliente1, cliente2,
-						cliente3, producto1, producto2, producto3, producto4, producto5);
+				trat.generarTicket(precfin1, precfin2, nomproductof1, nomproductof2);
 			} else {
 				// si el numero no esta registrado le da error y le avisa
 				System.out.println("Tu telefono no esta registrado");

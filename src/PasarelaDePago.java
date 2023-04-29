@@ -6,7 +6,7 @@ public class PasarelaDePago {
 	private double importe;
 	String codigoPago;
 
-	Scanner sc2 = new Scanner(System.in);
+
 
 //atributos
 	public PasarelaDePago() {
@@ -40,21 +40,21 @@ public class PasarelaDePago {
 	}
 
 //metodo de pago efectivo
-	public void pagoEfectivo() {
+	public void pagoEfectivo(Scanner sc) {
 
 		double total = 0;
 		double vueltas;
 		Integer c = 0, v = 0, d = 0, bc = 0, md = 0, u = 0;
 		Integer m = 0, vc = 0, dc = 0, cc = 0, dic = 0, uc = 0;
 		System.out.println("Indique la cantidad a pagar en efectivo:");
-		double pago = sc2.nextDouble();
+		double pago = sc.nextDouble();
 		if (pago >= importe) {
 			System.out.println("Pago realizado con éxito. Código de pago: " + codigoPago);
 			importe = 0;
 			codigoPago = String.valueOf((new Date()).getTime());
 			System.out.println("Ha seleccionado pago en efectivo");
 			System.out.println("Porfavor indique la cantidad de dinero que va a entregar");
-			pago = sc2.nextDouble();
+			pago = sc.nextDouble();
 			if (pago > total) {
 				// calculamos las vueltas del pago en efectivo
 				vueltas = pago - total;
@@ -155,14 +155,14 @@ public class PasarelaDePago {
 	}
 
 	// metodo de pago tarjeta
-	public void pagoTarjeta() {
+	public void pagoTarjeta(Scanner sc) {
 		System.out.println("Ha seleccionado pago en tarjeta");
 		System.out.println("¿Cuanto quiere pagar?");
-		double pago2 = sc2.nextDouble();
+		double pago2 = sc.nextDouble();
 		if (pago2 >= importe) {
 			System.out.println("Ingrese los numeros de su tarjeta en su debido orden");
-			String numerotar1 = sc2.nextLine();
-			numerotar1 = sc2.nextLine();
+			String numerotar1 = sc.nextLine();
+			numerotar1 = sc.nextLine();
 
 			String numerotar = numerotar1.replaceAll("\\s", "");
 			System.out.println(numerotar);
@@ -200,27 +200,28 @@ public class PasarelaDePago {
 	}
 
 	// metodo para que elijan que tipo de pago quieren
-	public void elegirpago(int precfin1, int precfin2, int precfinfin, PasarelaDePago pago) {
+	public void elegirpago(int precfin1, int precfin2, int precfinfin, PasarelaDePago pago, Scanner sc) {
 		precfinfin = precfin1 + precfin2;
 		System.out.println("Su precio final es: " + precfinfin);
 		System.out.println("Como desea pagar");
 		System.out.println("1.Efectivo");
 		System.out.println("2.Tarjeta");
 		System.out.println("3.Pago a cuenta");
-		int decision2 = sc2.nextInt();
+		int decision2 = sc.nextInt();
+
 
 
 		switch (decision2) {
 		// se le lleva al pago que haya decidido
 		case 1:
-			pago.pagoEfectivo();
+			pago.pagoEfectivo(sc);
 			System.out.println("Pago realizado con éxito. Código de pago: " + codigoPago);
 			importe = 0;
 
 			break;
 
 		case 2:
-			pago.pagoTarjeta();
+			pago.pagoTarjeta(sc);
 			System.out.println("Pago realizado con éxito. Código de pago: " + codigoPago);
 			importe = 0;
 
@@ -228,8 +229,8 @@ public class PasarelaDePago {
 
 		case 3:
 			System.out.println("indique su numero de cuenta");
-			String numcuenta = sc2.nextLine();
-			pago.pagoCuenta(numcuenta);
+			String numcuenta = sc.nextLine();
+			pago.pagoCuenta(numcuenta, sc);
 			break;
 		default:
 			System.out.println("Valor no valido");
@@ -238,7 +239,7 @@ public class PasarelaDePago {
 	}
 
 //metodo para pago Cuenta
-	public void pagoCuenta(String numeroCuenta) {
+	public void pagoCuenta(String numeroCuenta, Scanner sc) {
 //generamos el codigo de pago
 		System.out.println("Pago realizado con éxito. Código de pago: " + codigoPago);
 		codigoPago = String.valueOf((new Date()).getTime());
